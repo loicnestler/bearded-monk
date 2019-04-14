@@ -1,0 +1,14 @@
+{
+	"name": "bearded-monk",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "GPL-3.0-or-later",
+	"dependencies": {
+		"joi": "^14.3.1",
+		"monk": "^6.0.6",
+		"pluralize": "^7.0.0"
+	},
+	"description": "A ultra fast and lightweight ORM MongoDB driver built on top of monk and joi, heavily inspired by Mongoose",
+	"repository": "https://github.com/loicnestler/bearded-monk.git",
+	"author": "Loïc Nestler"
+}

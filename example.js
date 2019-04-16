@@ -4,7 +4,8 @@ const {Joi, model} = beardedMonk
 const userSchema = Joi.object().keys({
 	name     : Joi.string().alphanum().min(3).max(32).required(),
 	password : Joi.string().min(8),
-	email    : Joi.string().email()
+	email    : Joi.string().email(),
+	test     : Joi.string().default('hallo welt')
 })
 
 const User = model('User', userSchema)

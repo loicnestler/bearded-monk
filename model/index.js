@@ -34,12 +34,12 @@ module.exports = function(connection) {
 
 		class Model {
 			constructor(data) {
-				const valid = Joi.validate(data, schema)
-				if (valid.error) {
-					throw new Error(valid.error)
+				const result = Joi.validate(data, schema)
+				if (result.error) {
+					throw new Error(result.error)
 				}
 
-				this.data = data
+				this.data = result.value
 			}
 
 			save() {

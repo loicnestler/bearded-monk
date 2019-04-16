@@ -3,7 +3,7 @@ A ultra fast and lightweight ORM MongoDB driver built on top of monk and joi, he
 
 ### Usage
 ```javascript
-const beardedMonk = require('bearded-monk')('mongodb://localhost/test3')
+const beardedMonk = require('bearded-monk')('mongodb://localhost/test')
 const {Joi, model} = beardedMonk
 
 const userSchema = Joi.object().keys({

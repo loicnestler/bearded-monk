@@ -15,8 +15,9 @@ const u = new User({
 	email    : 'foo@example.com'
 })
 
-u.save().then(() => {
-	User.findOne({name: 'Foo'}).then((doc) => {
-		console.log(doc)
-	})
+u.save().then((doc) => {
+	console.log(doc)
+	// User.findOne({name: 'Foo'}).then((doc) => {
+	// 	console.log(doc)
+	// })
 })

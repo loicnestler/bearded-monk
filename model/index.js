@@ -43,8 +43,11 @@ module.exports = function(connection) {
 			}
 
 			save() {
-				return collection.insert(this.data).then((doc) => {
-					log('insert', {target: doc._id})
+				return new Promise((resolve) => {
+					collection.insert(this.data).then((doc) => {
+						log('insert', {target: doc._id})
+						resolve(doc)
+					})
 				})
 			}
 

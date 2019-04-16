@@ -24,7 +24,9 @@ module.exports = function(connection) {
 				return
 			}
 
-			collection.insert(predefinedData)
+			if (predefinedData) {
+				collection.insert(predefinedData)
+			}
 
 			schemaCollection.findOne({type: 'init'}, {limit: 1, sort: {_id: -1}}).then((doc) => {
 				if (!JSON.stringify(doc.changes.schema) == JSON.stringify(schemaDescription)) {

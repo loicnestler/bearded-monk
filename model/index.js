@@ -2,7 +2,7 @@ module.exports = function(connection) {
 	const pluralize = require('pluralize')
 	const Joi = require('joi')
 
-	const model = (name, schema, enableLogging = true) => {
+	const model = (name, schema, enableLogging = true, predefinedData) => {
 		const id = name.toLowerCase()
 
 		const collection = connection.get(pluralize.plural(id))
@@ -23,6 +23,8 @@ module.exports = function(connection) {
 				log('init', {changes: {schema: schemaDescription}})
 				return
 			}
+
+			collection.insert(predefinedData)
 
 			schemaCollection.findOne({type: 'init'}, {limit: 1, sort: {_id: -1}}).then((doc) => {
 				if (!JSON.stringify(doc.changes.schema) == JSON.stringify(schemaDescription)) {

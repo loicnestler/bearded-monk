@@ -18,19 +18,23 @@ module.exports = function(connection) {
 			log = () => {}
 		}
 
+		collection.count().then((count) => {
+			if (count === 0) {
+				collection.insert(predefinedData)
+			}
+		})
+
 		schemaCollection.count({}).then((count) => {
 			if (count === 0) {
 				log('init', {changes: {schema: schemaDescription}})
 				return
 			}
 
-			collection.insert(predefinedData).then(() => {
-				schemaCollection.findOne({type: 'init'}, {limit: 1, sort: {_id: -1}}).then((doc) => {
-					if (!JSON.stringify(doc.changes.schema) == JSON.stringify(schemaDescription)) {
-						//FIXME: compare 2 objects by stringifying them... :(
-						log('init', {changes: {schema: schemaDescription}})
-					}
-				})
+			schemaCollection.findOne({type: 'init'}, {limit: 1, sort: {_id: -1}}).then((doc) => {
+				if (!JSON.stringify(doc.changes.schema) == JSON.stringify(schemaDescription)) {
+					//FIXME: compare 2 objects by stringifying them... :(
+					log('init', {changes: {schema: schemaDescription}})
+				}
 			})
 		})
 

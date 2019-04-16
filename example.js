@@ -1,4 +1,4 @@
-const beardedMonk = require('.')('mongodb://localhost/test3')
+const beardedMonk = require('.')('mongodb://localhost/test38')
 const {Joi, model} = beardedMonk
 
 const userSchema = Joi.object().keys({
@@ -8,7 +8,7 @@ const userSchema = Joi.object().keys({
 	test     : Joi.string()
 })
 
-const User = model('User', userSchema)
+const User = model('User', userSchema, true, {})
 
 const u = new User({
 	name     : 'Foo',

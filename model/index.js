@@ -20,7 +20,9 @@ module.exports = function(connection) {
 
 		collection.count().then((count) => {
 			if (count === 0) {
-				collection.insert(predefinedData)
+				if (Object.keys(predefinedData).length > 0) {
+					collection.insert(predefinedData)
+				}
 			}
 		})
 

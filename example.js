@@ -16,11 +16,13 @@ const u = new User({
 	email    : 'foo@example.com'
 })
 
-u.save().then((doc) => {
-	console.log(doc)
-
+u.save().then(() => {
+	console.log(u)
 	setTimeout(() => {
-		u.data.name = 'LOL'
-		u.save()
-	}, 5000)
+		User.findOne({name: 'Foo'}).then((us) => {
+			us.data.name = 'lol'
+			us.save()
+			console.log(us)
+		})
+	}, 3000)
 })

@@ -5,6 +5,8 @@ module.exports = function(connection) {
 	const model = (name, schema, enableLogging = true, predefinedData = {}) => {
 		const id = name.toLowerCase()
 
+		schema = schema.keys({_id: Joi.any()})
+
 		const collection = connection.get(pluralize.plural(id))
 		const schemaCollection = connection.get(`schema.${id}`)
 
@@ -47,7 +49,9 @@ module.exports = function(connection) {
 					throw new Error(result.error)
 				}
 
+				if (data._id) this._id = data._id
 				this.data = result.value
+				console.log(this.data)
 			}
 
 			save() {
@@ -73,7 +77,15 @@ module.exports = function(connection) {
 			}
 
 			static findOne(query) {
-				return collection.findOne(query)
+				return new Promise((resolve, reject) => {
+					collection.findOne(query).then((data) => {
+						try {
+							resolve(new this(data))
+						} catch (err) {
+							reject(err)
+						}
+					})
+				})
 			}
 
 			static remove(query) {

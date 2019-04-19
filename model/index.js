@@ -51,7 +51,7 @@ module.exports = function(connection) {
 
 				if (data._id) this._id = data._id
 				this.data = result.value
-				console.log(this.data)
+				// console.log(this.data)
 			}
 
 			save() {
@@ -79,6 +79,9 @@ module.exports = function(connection) {
 			static findOne(query) {
 				return new Promise((resolve, reject) => {
 					collection.findOne(query).then((data) => {
+						if (!data) {
+							return resolve()
+						}
 						try {
 							resolve(new this(data))
 						} catch (err) {

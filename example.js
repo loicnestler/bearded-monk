@@ -18,7 +18,9 @@ const u = new User({
 
 u.save().then((doc) => {
 	console.log(doc)
-	// User.findOne({name: 'Foo'}).then((doc) => {
-	// 	console.log(doc)
-	// })
+
+	setTimeout(() => {
+		u.data.name = 'LOL'
+		u.save()
+	}, 5000)
 })

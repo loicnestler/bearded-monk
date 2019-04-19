@@ -52,10 +52,15 @@ module.exports = function(connection) {
 
 			save() {
 				return new Promise((resolve) => {
-					collection.insert(this.data).then((doc) => {
-						log('insert', {target: doc._id})
-						resolve(doc)
-					})
+					if (this._id) {
+						collection.update({_id: this._id}, this.data)
+					} else {
+						collection.insert(this.data).then((doc) => {
+							this._id = doc._id
+							log('insert', {target: doc._id})
+							resolve(doc)
+						})
+					}
 				})
 			}
 
